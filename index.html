@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Погода</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #4a4a4a, #2c2c2c, #4a4a4a, #2c2c2c);
+            background-size: 600% 600%;
+            animation: gradientMove 20s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+        @keyframes gradientMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #ccc;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            transition: all 0.5s ease;
+        }
+
+        .container:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        /* НОВИЙ СТИЛЬ ГОЛОВНОЇ КНОПКИ */
+        #getWeather {
+            padding: 14px 40px;
+            font-size: 20px;
+            color: white;
+            background: linear-gradient(135deg, #6c63ff, #48c6ef);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 0;
+            box-shadow: 0 8px 20px rgba(76, 110, 245, 0.5);
+            transition: all 0.4s ease;
+            font-weight: bold;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        #getWeather:hover {
+            background: linear-gradient(135deg, #48c6ef, #6c63ff);
+            box-shadow: 0 12px 24px rgba(76, 110, 245, 0.7);
+            transform: scale(1.05);
+        }
+
+        /* Анімація пульсації */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            padding: 12px 25px;
+            font-size: 18px;
+            margin: 5px;
+            border: 2px solid #f0f0f0;
+            border-radius: 30px;
+            background: rgba(80, 80, 80, 0.5);
+            color: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buttons button:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        #weather {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #d0d0d0;
+            line-height: 1.6;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            color: #ccc;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #aaaaaa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>🌍 Прогноз Погоди Онлайн</header>
+
+    <div class="container">
+        <h1>Дізнайся погоду</h1>
+        <button id="getWeather">Отримати погоду</button>
+        <div id="weather"></div>
+        <div class="buttons">
+        </div>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Сонце">
+            <h3>Сонячна погода</h3>
+            <p>Ідеально для прогулянок!</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/414/414825.png" alt="Дощ">
+            <h3>Дощова погода</h3>
+            <p>Не забудь парасолю!</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/642/642221.png" alt="Вітер">
+            <h3>Вітряна погода</h3>
+            <p>Краще залишитись вдома.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
